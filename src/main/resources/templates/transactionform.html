@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventa | Add Transaction</title>
+    <link rel="stylesheet" th:href="@{/css/main-stylesheet.css}">
+</head>
+<body>
+
+<form action="/save" method="post">
+    <div class="transactionform-div">
+        <h2>Add a Transaction</h2>
+        <div id="row1">
+            <label for="form-transactionnumber">Transaction Number</label>
+            <input type="text" name="transactionnumber" id="form-transactionnumber" readonly tabindex="-1" th:value="${transactionNo}" class="readonlyinput">
+            <label for="form-transactiondate">Transaction Date</label>
+            <input type="text" name="transactiondate" id="form-transactiondate" readonly tabindex="-1" th:value="${currentdatetime}" class="readonlyinput">
+            <label for="form-customername">Customer Name</label>
+            <input type="text" name="customername" id="form-customername" required autocomplete="off">
+        </div>
+        <div id="row2">
+            <label for="form-order">Order</label>
+            <select name="order" id="form-order">
+                <option value="">Select a Product</option>
+                <option value="PBCKNNUGGS">Plant-Based Chicken Nuggets</option>
+                <option value="KANGKONGCH">JM2DG's Special Kangkong Chips</option>
+                <option value="MSTRAWBTART">Mini Strawberry Tart</option>
+            </select>
+            <label for="form-priceperquantity">Price per Quantity</label>
+            <input type="text" name="priceperquantity" id="form-priceperquantity" value="Select an order" readonly tabindex="-1" class="readonlyinput">
+            <label for="form-quantity">Quantity</label>
+            <input type="text" name="quantity" id="form-quantity" required autocomplete="off">
+        </div>
+        <div id="row3">
+            <label for="form-totalprice">Total Price</label>
+            <input type="text" name="totalprice" id="form-totalprice" readonly tabindex="-1" class="readonlyinput">
+            <label for="form-payment">Payment</label>
+            <input type="text" name="payment" id="form-payment" required autocomplete="off">
+            <label for="form-change">Change</label>
+            <input type="text" name="change" id="form-change" readonly tabindex="-1" class="readonlyinput">
+        </div>
+        <div id="row4">
+            <button type="submit">Submit</button>
+            <button type="button" id="clearformbtn">Clear Form</button>
+        </div>
+    </div>
+</form>
+
+<div class="toolbar">
+    <a href="/dashboard">DASHBOARD</a>
+    <a href="/transactionform">TRANSACTION FORM</a>
+</div>
+
+<script type="text/javascript">
+    var form_priceperquantity = document.getElementById("form-priceperquantity");
+    var form_quantity = document.getElementById("form-quantity");
+    var form_payment = document.getElementById("form-payment");
+    var form_totalprice = document.getElementById("form-totalprice");
+    document.getElementById("form-order").onchange = (event) =>
+    {
+        switch(event.target.value)
+        {
+            case "PBCKNNUGGS":
+                form_priceperquantity.value = "35";
+            break;
+            case "KANGKONGCH":
+                form_priceperquantity.value = "30";
+            break;
+            case "MSTRAWBTART":
+                form_priceperquantity.value = "20";
+            break;
+            default:
+                form_priceperquantity.value = "Select an order";
+        }
+       form_totalprice.value = parseInt(form_quantity.value) * parseInt(form_priceperquantity.value);
+    }
+    form_quantity.onkeyup = () =>
+    {
+        form_totalprice.value = parseInt(form_quantity.value) * parseInt(form_priceperquantity.value);
+    }
+    form_payment.onkeyup = () =>
+    {
+        document.getElementById("form-change").value = parseInt(form_payment.value) - parseInt(form_totalprice.value);
+    }
+
+    document.getElementById("clearformbtn").onclick = () =>
+    {
+        location.reload();
+    }
+</script>
+<!-- iisang file ko lang ung mga scripts at styles pero pag dinesign nyo na eh paseparate naman sa webpage oh -->
+</body>
+</html>
