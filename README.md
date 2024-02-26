@@ -9,12 +9,12 @@ Mobile App and Web Development Strand
 
 By:
 
-Delgado, Argie
-Villanueva, Fernando, Jr.
-Macasilhig, Khyle Myrvin
-Fegalan, Christopher
-Seguin, Jude Cedric
-Consigna, Ryan
+- Delgado, Argie
+- Villanueva, Fernando, Jr.
+- Macasilhig, Khyle Myrvin
+- Fegalan, Christopher
+- Seguin, Jude Cedric
+- Consigna, Ryan
 
 January 2024
 
